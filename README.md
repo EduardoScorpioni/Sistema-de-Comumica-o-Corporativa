@@ -1,8 +1,4 @@
-Beleza — vou transformar seu README em um **nível GitHub top (estiloso, moderno e profissional)** com badges, layout centralizado, seções bonitas e espaço pra imagens/GIF 👇
-
----
-
-# ✨ (README MODERNO)
+# ✨ (README)
 
 ````md
 <h1 align="center">🚀 The Connected Hub</h1>
@@ -33,7 +29,7 @@ O **The Connected Hub** é uma plataforma que transforma a comunicação empresa
 > 💡 
 
 <p align="center">
-  <img src="./docs/preview.gif" width="600">
+  <img src="img/content.png " width="600">
 </p>
 
 ---
