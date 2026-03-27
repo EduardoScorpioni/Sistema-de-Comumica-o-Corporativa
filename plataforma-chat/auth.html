@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Beehive - Login</title>
+</head>
+<body>
+
+<h2>Cadastro</h2>
+
+<input id="nome" placeholder="Nome"><br><br>
+<input id="email" placeholder="Email"><br><br>
+<input id="senha" type="password" placeholder="Senha"><br><br>
+
+<button onclick="registrar()">Cadastrar</button>
+
+<hr>
+
+<h2>Login</h2>
+
+<input id="loginEmail" placeholder="Email"><br><br>
+<input id="loginSenha" type="password" placeholder="Senha"><br><br>
+
+<button onclick="login()">Entrar</button>
+
+<p id="resposta"></p>
+
+<script>
+async function registrar() {
+  const nome = document.getElementById("nome").value;
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+
+  const res = await fetch("http://localhost:3000/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ nome, email, senha })
+  });
+
+  const data = await res.json();
+  document.getElementById("resposta").innerText = JSON.stringify(data);
+}
+
+async function login() {
+  const email = document.getElementById("loginEmail").value;
+  const senha = document.getElementById("loginSenha").value;
+
+  const res = await fetch("http://localhost:3000/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, senha })
+  });
+
+  const data = await res.json();
+
+  if (data.usuario) {
+    localStorage.setItem("usuario", JSON.stringify(data.usuario));
+  }
+
+  document.getElementById("resposta").innerText = JSON.stringify(data);
+}
+</script>
+
+</body>
+</html>

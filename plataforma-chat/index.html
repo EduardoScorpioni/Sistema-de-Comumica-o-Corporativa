@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Chat Simples</h2>
+
+<input id="msg" placeholder="Digite..." />
+<button onclick="enviar()">Enviar</button>
+
+<ul id="chat"></ul>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+
+socket.on("mensagem", (msg) => {
+  const li = document.createElement("li");
+  li.innerText = msg;
+  document.getElementById("chat").appendChild(li);
+});
+
+function enviar() {
+  const msg = document.getElementById("msg").value;
+
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+  socket.emit("mensagem", {
+    texto: msg,
+    usuario: usuario.nome,
+    usuarioId: usuario.id
+  });
+}
+</script>
+
+</body>
+</html>
