@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beehive — Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="login-wrapper">
+  <div class="login-card">
+
+    <div class="login-logo">
+      <div class="logo-icon">🐝</div>
+      <h1>Bee<span>hive</span></h1>
+    </div>
+
+    <h2>Acesse sua conta</h2>
+
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input id="email" type="email" placeholder="voce@empresa.com" />
+    </div>
+
+    <div class="field">
+      <label for="senha">Senha</label>
+      <input id="senha" type="password" placeholder="••••••••" />
+    </div>
+
+    <button class="btn-login" onclick="login()">Entrar</button>
+
+    <p id="resposta"></p>
+
+  </div>
+</div>
+
+<script>
+async function login() {
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+
+  const res = await fetch("/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, senha })
+  });
+
+  const data = await res.json();
+
+  if (data.usuario) {
+    localStorage.setItem("usuario", JSON.stringify(data.usuario));
+    window.location.href = "/chat.html";
+  } else {
+    document.getElementById("resposta").innerText = "E-mail ou senha incorretos.";
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+/* ── LOGIN ── */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.login-card h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #111;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.field label {
+  font-size: 0.82rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.field input {
+  font-family: inherit;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 9px 11px;
+  outline: none;
+  color: #222;
+  background: #fafafa;
+}
+
+.field input:focus {
+  border-color: #888;
+  background: #fff;
+}
+
+.btn-login {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  background: #333;
+}
+
+#resposta {
+  margin-top: 12px;
+  font-size: 0.83rem;
+  color: #c0392b;
+  text-align: center;
+}
+
+/* ── CHAT ── */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 720px;
+  margin: 0 auto;
+  background: #fff;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+
+header h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-badge {
+  font-size: 0.82rem;
+  color: #666;
+}
+
+.btn-logout {
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: #555;
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  background: #f4f4f4;
+}
+
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+#chat {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#chat li {
+  display: flex;
+  flex-direction: column;
+  max-width: 65%;
+  align-self: flex-start;
+}
+
+#chat li.own {
+  align-self: flex-end;
+}
+
+.msg-bubble {
+  background: #f0f0f0;
+  border-radius: 4px 12px 12px 12px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #222;
+  word-break: break-word;
+}
+
+#chat li.own .msg-bubble {
+  background: #222;
+  color: #fff;
+  border-radius: 12px 12px 4px 12px;
+}
+
+.msg-meta {
+  font-size: 0.72rem;
+  color: #999;
+  margin-top: 3px;
+  padding: 0 3px;
+}
+
+#chat li.own .msg-meta {
+  text-align: right;
+}
+
+.input-area {
+  display: flex;
+  gap: 8px;
+  padding: 14px 20px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+#msg {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 9px 12px;
+  outline: none;
+  color: #222;
+}
+
+#msg:focus {
+  border-color: #888;
+}
+
+.btn-send {
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 18px;
+  cursor: pointer;
+}
+
+.btn-send:hover {
+  background: #333;
+}

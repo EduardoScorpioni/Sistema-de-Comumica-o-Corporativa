@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beehive — Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🐝</div>
+      <h1>Bee<span>hive</span></h1>
+    </div>
+    <div class="header-actions">
+      <span class="user-badge" id="nome-usuario"></span>
+      <button class="btn-logout" onclick="logout()">Sair</button>
+    </div>
+  </header>
+
+  <div class="chat-area">
+    <ul id="chat"></ul>
+  </div>
+
+  <div class="input-area">
+    <input id="msg" placeholder="Escreva uma mensagem..." autocomplete="off" />
+    <button class="btn-send" onclick="enviar()">Enviar →</button>
+  </div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+if (!usuario) {
+  window.location.href = "/login.html";
+}
+
+document.getElementById("nome-usuario").innerText = usuario.nome;
+
+const socket = io();
+
+socket.on("historico", (mensagens) => {
+  mensagens.forEach((msg) => adicionarMensagem(msg));
+});
+
+socket.on("mensagem", (msg) => {
+  adicionarMensagem(msg);
+});
+
+function adicionarMensagem(msg) {
+  const li = document.createElement("li");
+  const isOwn = msg.usuario === usuario.nome;
+  if (isOwn) li.classList.add("own");
+
+  li.innerHTML = `
+    <div class="msg-bubble">${escapeHtml(msg.texto)}</div>
+    <div class="msg-meta">${escapeHtml(msg.usuario)}</div>
+  `;
+
+  document.getElementById("chat").appendChild(li);
+  li.scrollIntoView({ behavior: "smooth" });
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function enviar() {
+  const input = document.getElementById("msg");
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  socket.emit("mensagem", {
+    texto: msg,
+    usuario: usuario.nome,
+    usuarioId: usuario.id,
+    canalId: 1
+  });
+
+  input.value = "";
+}
+
+document.getElementById("msg").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") enviar();
+});
+
+function logout() {
+  localStorage.removeItem("usuario");
+  window.location.href = "/login.html";
+}
+</script>
+
+</body>
+</html>
